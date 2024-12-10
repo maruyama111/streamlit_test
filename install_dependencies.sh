@@ -1,12 +1,10 @@
 #!/bin/bash
 
-# システムパッケージの更新とインストール
 echo "Updating system packages..."
 apt-get update && apt-get install -y \
     python3-pip \
     python3-distutils \
     cmake \
-    git \
     build-essential \
     libopenblas-dev \
     liblapack-dev \
@@ -14,9 +12,9 @@ apt-get update && apt-get install -y \
     libboost-python-dev \
     libboost-thread-dev
 
-# Python依存関係インストール
 echo "Upgrading pip..."
 pip install --upgrade pip
 
-# 必要なモジュールをインストールする
+echo "Installing Python dependencies..."
 pip install -r requirements.txt
+
