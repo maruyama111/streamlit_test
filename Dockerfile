@@ -1,5 +1,5 @@
-# ベースイメージとしてPython 3.12を使用
-FROM python:3.12-slim
+# ベースイメージとしてPython 3.11を使用
+FROM python:3.11-slim
 
 # install_dependencies.shコピーして実行する設定
 COPY install_dependencies.sh .
@@ -13,3 +13,4 @@ COPY . .
 
 # Streamlitアプリ起動コマンド
 CMD ["streamlit", "run", "app.py"]
+

@@ -9,7 +9,10 @@ apt-get update && apt-get install -y \
     git \
     build-essential \
     libopenblas-dev \
-    liblapack-dev
+    liblapack-dev \
+    libx11-dev \
+    libboost-python-dev \
+    libboost-thread-dev
 
 # Python依存関係インストール
 echo "Upgrading pip..."
