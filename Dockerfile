@@ -1,16 +1,53 @@
-# ベースイメージとしてPython 3.11を使用
-FROM python:3.11-slim
+# This is a sample Dockerfile you can modify to deploy your own app based on face_recognition
 
-# 作業ディレクトリの作成
-WORKDIR /app
+FROM python:3.10.3-slim-bullseye
 
-# install_dependencies.shをコピーして実行
-COPY install_dependencies.sh .
-RUN chmod +x install_dependencies.sh && ./install_dependencies.sh
+RUN apt-get -y update
+RUN apt-get install -y --fix-missing \
+    build-essential \
+    cmake \
+    gfortran \
+    git \
+    wget \
+    curl \
+    graphicsmagick \
+    libgraphicsmagick1-dev \
+    libatlas-base-dev \
+    libavcodec-dev \
+    libavformat-dev \
+    libgtk2.0-dev \
+    libjpeg-dev \
+    liblapack-dev \
+    libswscale-dev \
+    pkg-config \
+    python3-dev \
+    python3-numpy \
+    software-properties-common \
+    zip \
+    && apt-get clean && rm -rf /tmp/* /var/tmp/*
 
-# アプリケーションファイルをコピー
-COPY . .
+RUN cd ~ && \
+    mkdir -p dlib && \
+    git clone -b 'v19.9' --single-branch https://github.com/davisking/dlib.git dlib/ && \
+    cd  dlib/ && \
+    python3 setup.py install --yes USE_AVX_INSTRUCTIONS
 
-# Streamlitアプリケーションの起動
-CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.enableCORS=false"]
+
+# The rest of this file just runs an example script.
+
+# If you wanted to use this Dockerfile to run your own app instead, maybe you would do this:
+# COPY . /root/your_app_or_whatever
+# RUN cd /root/your_app_or_whatever && \
+#     pip3 install -r requirements.txt
+# RUN whatever_command_you_run_to_start_your_app
+
+COPY . /root/face_recognition
+RUN cd /root/face_recognition && \
+    pip3 install -r requirements.txt && \
+    python3 setup.py install
+
+# Add pip3 install opencv-python==4.1.2.30 if you want to run the live webcam examples
+
+CMD cd /root/face_recognition/examples && \
+    python3 recognize_faces_in_pictures.py
 
