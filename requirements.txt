@@ -1,0 +1,9 @@
+numpy
+pandas
+face_recognition
+pillow
+scikit-learn
+mediapipe
+opencv-python
+matplotlib
+streamlit
