@@ -1,5 +1,7 @@
 FROM python:3.11-slim
 
+RUN python3 -m pip install --upgrade pip setuptools wheel
+
 # 必要なライブラリをインストール
 COPY install_dependencies.sh /tmp/install_dependencies.sh
 RUN bash /tmp/install_dependencies.sh && rm /tmp/install_dependencies.sh
