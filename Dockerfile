@@ -1,7 +1,7 @@
 # ベースイメージとしてPython 3.12を使用
 FROM python:3.12-slim
 
-# システムパッケージインストールとPython依存関係設定
+# install_dependencies.shコピーして実行する設定
 COPY install_dependencies.sh .
 RUN chmod +x install_dependencies.sh && ./install_dependencies.sh
 
