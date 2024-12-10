@@ -8,7 +8,8 @@ apt-get update && apt-get install -y \
     git \
     build-essential \
     libopenblas-dev \
-    liblapack-dev
+    liblapack-dev \
+    python3-distutils
 
 # Python依存関係インストール
 echo "Installing Python dependencies..."
