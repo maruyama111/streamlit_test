@@ -1,23 +1,15 @@
+# ベースイメージとしてPython 3.12を使用
 FROM python:3.12-slim
 
-# パッケージインストールに必要なツール
-RUN apt-get update && apt-get install -y \
-    python3-pip \
-    cmake \
-    libopenblas-dev \
-    liblapack-dev \
-    git \
-    build-essential
+# システムパッケージインストールとPython依存関係設定
+COPY install_dependencies.sh .
+RUN chmod +x install_dependencies.sh && ./install_dependencies.sh
 
 # 作業ディレクトリ設定
 WORKDIR /app
 
-# 依存関係インストール
-COPY requirements.txt .
-RUN pip install --upgrade pip && pip install -r requirements.txt
-
 # アプリケーションファイルコピー
 COPY . .
 
-# アプリ起動コマンド
+# Streamlitアプリ起動コマンド
 CMD ["streamlit", "run", "app.py"]
