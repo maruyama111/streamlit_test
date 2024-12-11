@@ -1,0 +1,5 @@
+[server]
+enableCORS = false
+
+[runner]
+pythonVersion = "3.10"
