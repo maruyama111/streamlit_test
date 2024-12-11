@@ -3,3 +3,4 @@ venv
 Dockerfile
 install_dependencies.sh
 config.toml
+packages.txt
