@@ -2,4 +2,4 @@
 enableCORS = false
 
 [runner]
-pythonVersion = "3.10"
+pythonVersion = "3.8"
