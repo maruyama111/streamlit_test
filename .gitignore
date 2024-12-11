@@ -2,3 +2,4 @@ test_streamlit.py
 venv
 Dockerfile
 install_dependencies.sh
+config.toml
